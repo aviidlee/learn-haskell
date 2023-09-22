@@ -15,3 +15,4 @@ yank n _
     | n <= 0 = []
 yank n list = case (n, list) of (_, []) -> []
                                 (n, first:rest) -> first : yank (n-1) rest
+                                
