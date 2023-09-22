@@ -15,4 +15,8 @@ yank n _
     | n <= 0 = []
 yank n list = case (n, list) of (_, []) -> []
                                 (n, first:rest) -> first : yank (n-1) rest
-                                
+
+-- Reverse a list 
+backwards :: [a] -> [a]
+backwards list = case list of [] -> []
+                              (first:rest) -> backwards rest ++ [first]

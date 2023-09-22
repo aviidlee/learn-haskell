@@ -1,4 +1,3 @@
-
 assignGrade :: (Num a) => a -> a -> String
     assignGrade pointsObtained pointsAvailable 
         | percentage < 0.2 = "TROLL"
