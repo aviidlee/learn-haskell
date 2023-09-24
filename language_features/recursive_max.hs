@@ -20,3 +20,9 @@ yank n list = case (n, list) of (_, []) -> []
 backwards :: [a] -> [a]
 backwards list = case list of [] -> []
                               (first:rest) -> backwards rest ++ [first]
+
+-- Zip 
+zip' :: [a] -> [b] -> [(a,b)] 
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
