@@ -33,3 +33,8 @@ find _ [] =  False
 find x (y:ys) 
     | x == y = True 
     | otherwise = find x ys
+
+-- Quicksort 
+qsort :: (Ord a) => [a] -> [a]
+qsort [] = [] 
+qsort (x:xs) = qsort [a | a <- xs, a <= x] ++ [x] ++ [a | a <- xs, a > x]
