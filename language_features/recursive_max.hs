@@ -26,3 +26,10 @@ zip' :: [a] -> [b] -> [(a,b)]
 zip' _ [] = []
 zip' [] _ = []
 zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
+
+-- elem 
+find :: (Eq a) => a -> [a] -> Bool 
+find _ [] =  False 
+find x (y:ys) 
+    | x == y = True 
+    | otherwise = find x ys
