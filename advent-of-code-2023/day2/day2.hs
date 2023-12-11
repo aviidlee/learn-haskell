@@ -22,11 +22,13 @@ recover_calibration_value input =
 get_digits :: String -> String
 get_digits input = "not yet implemented"
 
-get_first_number :: String -> String 
-get_first_number input 
-    | maybe_number == [] = get_first_number (tail input)
-    | otherwise = maybe_number !! 0
+get_numbers :: String -> [String] 
+get_numbers input
+    | input == [] = []
+    | maybe_number == [] = get_numbers (tail input) 
+    | otherwise = maybe_number ++ (get_numbers (drop (length (maybe_number !! 0)) input))
     where maybe_number = get_head_if_number input
+
 
 get_head_if_number :: String -> [String] 
 get_head_if_number input = get_head_if_digit input ++ get_head_if_number_in_words input 
