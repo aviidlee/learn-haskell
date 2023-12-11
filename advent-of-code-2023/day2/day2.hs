@@ -20,9 +20,25 @@ recover_calibration_value input =
 
 
 get_digits :: String -> String
-get_digits input = filter isDigit input
+get_digits input = "not yet implemented"
 
-starts_with_digit :: String -> [String]
-starts_with_digit input = 
+get_first_number :: String -> String 
+get_first_number input 
+    | maybe_number == [] = get_first_number (tail input)
+    | otherwise = maybe_number !! 0
+    where maybe_number = get_head_if_number input
+
+get_head_if_number :: String -> [String] 
+get_head_if_number input = get_head_if_digit input ++ get_head_if_number_in_words input 
+
+
+get_head_if_digit :: String -> [String] 
+get_head_if_digit (x:xs)
+    | isDigit x = [[x]]
+    | otherwise = []
+
+
+get_head_if_number_in_words :: String -> [String]
+get_head_if_number_in_words input = 
     filter (flip isPrefixOf input) nums 
     where nums = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
