@@ -19,6 +19,12 @@ main = do
     print answer
 
 
+get_answer :: [String] -> Int
+get_answer input = do
+    sum recovered_values 
+    where recovered_values = map recover_calibration_value input 
+
+    
 recover_calibration_value :: String -> Int
 recover_calibration_value input =
     read string_digits :: Int 
@@ -36,7 +42,7 @@ get_numbers :: String -> [String]
 get_numbers input
     | input == [] = []
     | maybe_number == [] = get_numbers (tail input) 
-    | otherwise = maybe_number ++ (get_numbers (drop (length (maybe_number !! 0)) input))
+    | otherwise = maybe_number ++ (get_numbers (tail input))
     where maybe_number = get_head_if_number input
 
 
