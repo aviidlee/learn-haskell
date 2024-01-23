@@ -27,6 +27,9 @@ extra-source-files:
     CHANGELOG.md
     README.md
 
+exposed-modules:
+    language_features/types.hs
+
 executable learn-haskell
     main-is:          Main.hs
 
