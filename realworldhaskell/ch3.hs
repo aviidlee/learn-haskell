@@ -1,4 +1,6 @@
 -- https://book.realworldhaskell.org/read/defining-types-streamlining-functions.html
+import Data.List (sortBy)
+
 
 -- Remember in Haskell, the data type name and constructor name can be different.
 data BookInfo = Book Int String [String] 
@@ -29,7 +31,7 @@ type SpellLevel = Int
 
 data Loot = Sword Int 
     | Shield Int 
-	| WizardStaff Power SpellLevel 
+	  | WizardStaff Power SpellLevel 
       deriving (Show)
 	
 lootMessage :: Loot -> String 
@@ -68,3 +70,35 @@ pluralise word counts = map plural counts
           plural 1 = "one " ++ word
           plural n = show n ++ " " ++ word ++ "s"
 
+-- length function
+len :: [a] -> Integer
+len [] = 0
+len (x:xs) = len(xs) + 1
+
+-- Mean of a list
+mean :: Fractional a => [a] -> Maybe a 
+mean [] = Nothing 
+mean xs = Just (sum xs / (fromIntegral (len xs)))
+
+-- Turn into palindrome
+palindromize :: [a] -> [a]
+palindromize xs = xs ++ (reverse xs)
+
+-- isPalindrome
+isPalindrome :: Eq a => [a] -> Bool 
+isPalindrome xs = (xs == (reverse xs))
+
+-- sort sublists by length
+sortByLength :: [[a]] -> [[a]] 
+sortByLength xs = sortBy (\l1 l2 -> compare (len l1) (len l2)) xs
+
+-- Join list of lists using separator 
+intersperse :: a -> [[a]] -> [a]
+intersperse _ [] = []
+intersperse _ (x:[]) = x
+intersperse sep (x:xs) = x ++ [sep] ++ (intersperse sep xs)
+
+-- Determine height of tree
+height :: Tree a -> Integer
+height (Node _ Nothing Nothing) = 1  
+height (Node _ (Just a) (Just b)) = 1 + (max (height a) (height b))  
