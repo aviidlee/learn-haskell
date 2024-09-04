@@ -1,3 +1,6 @@
+import Data.Char (digitToInt, isDigit)
+import Data.List (find)
+
 -- Ex 1 
 
 safeHead :: [a] -> Maybe a
@@ -40,3 +43,26 @@ firstOfEachLine input =
 
 firstOfLine :: String -> String
 firstOfLine line = head $ words line
+
+-- Fold to rewrite asInt function 
+asInt_foldl xs = foldl step 0 xs 
+  where step acc x
+          | isDigit x = sign * (digitToInt x) + (acc * 10) 
+          | x == '-' && acc == 0 = 0
+          | otherwise = error "Not a number"
+          where sign = getSign xs
+
+getSign :: String -> Int
+getSign str = case str of
+    '-':_ -> -1
+    _ -> 1
+
+-- asInt_fold but with Either to allow user to handle errors
+type ErrorMessage = String
+asInt_either :: String -> Either ErrorMessage Int 
+asInt_either xs = case firstNonDigit of 
+    Nothing -> Right $ asInt_foldl xs
+    Just x -> Left $ ("Non-digit" ++ [x])
+  where firstNonDigit = find (\y -> not (isDigit y) && y !=) xs
+
+  
