@@ -4,6 +4,7 @@ multiplesLessThan number max =
   takeWhile (<max) (map (*number) [1..])
 
 multiples :: [Integer] -> Integer -> [[Integer]]
+multiples 0 _ = 0
 multiples factors limit = map (`multiplesLessThan` limit) factors
 
 -- Attempt 1: exercism does not have `Set`
