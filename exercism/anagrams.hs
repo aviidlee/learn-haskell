@@ -16,4 +16,8 @@ isAnagram target word
         wordLowerCase = map toLower word 
 
 letterComposition :: String -> Map.Map Char Int
-letterComposition word = undefined
+letterComposition "" = Map.fromList([])
+letterComposition (x:xs) = case Map.lookup x letterMap of 
+  Just value -> Map.insert x (value + 1) letterMap
+  Nothing -> Map.insert x 1 letterMap
+  where letterMap = letterComposition xs
